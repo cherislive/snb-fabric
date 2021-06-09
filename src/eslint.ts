@@ -59,7 +59,7 @@ module.exports = {
     isTsProject ? ['prettier/@typescript-eslint', 'plugin:@typescript-eslint/recommended'] : [],
   ),
   parser: isTsProject ? '@typescript-eslint/parser' : '@babel/eslint-parser',
-  plugins: ['jest', 'unicorn', 'html', 'vue'],
+  plugins: ['eslint-comments', 'jest', 'unicorn', 'html', 'vue'],
   env: {
     browser: true,
     node: true,
@@ -69,8 +69,7 @@ module.exports = {
     jasmine: true,
   },
   rules: {
-    'accessor-pairs': 0, // 在对象中使用getter/setter
-    'brace-style': [1, '1tbs'], //大括号风格
+    // Conflict with prettier
     'generator-star-spacing': 0,
     'function-paren-newline': 0,
     'import/no-unresolved': 0,
@@ -103,6 +102,7 @@ module.exports = {
     'object-curly-newline': 0,
     'implicit-arrow-linebreak': 0,
     'operator-linebreak': 0,
+    'eslint-comments/no-unlimited-disable': 0,
     'no-param-reassign': 2,
     'space-before-function-paren': 0,
     ...(isTsProject ? tsEslintConfig : {}),

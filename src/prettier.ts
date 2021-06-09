@@ -12,12 +12,6 @@ module.exports = {
       options: {
         parser: 'json',
       },
-    },
-    {
-      files: 'document.ejs',
-      options: {
-        parser: 'html',
-      },
-    },
+    }
   ],
 };

@@ -2,6 +2,13 @@ import * as path from 'path';
 import * as fs from 'fs';
 import tsEslintConfig from './tsEslintConfig';
 
+/**
+ * 在使用自定义解析器时，
+ * 为了让 ESLint 在处理非 ECMAScript 5 特性时正常工作，
+ * 配置属性 parserOptions 仍然是必须的
+ * 解析器会被传入parserOptions，
+ * 但是不一定会使用它们来决定功能特性的开关。	
+ */
 const parserOptions = {
   ecmaFeatures: {
     jsx: true,
@@ -104,13 +111,13 @@ module.exports = {
     // support import modules from TypeScript files in JavaScript files
     'import/resolver': {
       node: {
-        extensions: isTsProject ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] : ['.js', '.jsx', '.vue'],
+        extensions: isTsProject ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] : ['.js', '.jsx'],
       },
     },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
     },
-    'import/extensions': ['.js', '.vue', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts'],
+    'import/extensions': ['.js', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts'],
     'import/external-module-folders': ['node_modules', 'node_modules/@types'],
     polyfills: ['fetch', 'Promise', 'URL', 'object-assign'],
   },

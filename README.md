@@ -12,14 +12,7 @@ in `.eslintrc.js`
 
 ```js
 module.exports = {
-  extends: [require.resolve('vue-fabric/dist/eslint')],
-
-  // in antd-design-pro
-  globals: {
-    ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: true,
-    page: true,
-  },
-
+  extends: [require.resolve('snb-fabric/dist/eslint')],
   rules: {
     // your rules
   },
@@ -30,7 +23,7 @@ in `.stylelintrc.js`
 
 ```js
 module.exports = {
-  extends: [require.resolve('vue-fabric/dist/stylelint')],
+  extends: [require.resolve('snb-fabric/dist/stylelint')],
   rules: {
     // your rules
   },
@@ -40,7 +33,7 @@ module.exports = {
 in `.prettierrc.js`
 
 ```js
-const fabric = require('vue-fabric');
+const fabric = require('snb-fabric');
 
 module.exports = {
   ...fabric.prettier,

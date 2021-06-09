@@ -1,6 +1,6 @@
 {
   "name": "snb-fabric",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A collection of configuration files containing prettier, eslint, stylelint",
   "keywords": [
     "eslint",
@@ -33,7 +33,7 @@
     "prettier": "prettier -c --write \"**/*\"",
     "testTS": "npm run build && cd tsExample && npm run lint",
     "testJS": "npm run build && cd jsExample && npm run lint",
-    "test": "npm run testTS && npm run testJS"
+    "test": "npm run testJS"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -76,6 +76,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "eslint-plugin-html": "^6.1.2",
     "np": "^6.2.5",
     "prettier": "^2.2.1"
   }

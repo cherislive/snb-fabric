@@ -7,7 +7,7 @@ const parserOptions = {
     jsx: true,
   },
   babelOptions: {
-    presets: ['@babel/preset-env', '@babel/preset-typescript'],
+    presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
     plugins: [
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
@@ -15,7 +15,6 @@ const parserOptions = {
   },
   requireConfigFile: false,
   project: './tsconfig.json',
-  parser: '@typescript-eslint/parser',
 };
 
 const isJsMoreTs = async (path = 'src') => {
@@ -39,20 +38,13 @@ if (isTsProject) {
 }
 
 module.exports = {
-  globals: {
-    page: true,
-  },
-  root: true,
-  extends: [
-    'eslint-config-airbnb-base',
-    'prettier',
-    'plugin:vue/essential',
-    'eslint:recommended',
-  ].concat(
-    isTsProject ? ['prettier/@typescript-eslint', 'plugin:@typescript-eslint/recommended'] : [],
+  extends: ['eslint-config-airbnb-base', 'prettier', 'prettier/react'].concat(
+    isTsProject
+      ? ['prettier/@typescript-eslint', 'plugin:@typescript-eslint/recommended']
+      : ['plugin:react/recommended'],
   ),
   parser: isTsProject ? '@typescript-eslint/parser' : '@babel/eslint-parser',
-  plugins: ['jest', 'unicorn', 'html', 'vue'],
+  plugins: ['eslint-comments', 'react', 'jest', 'unicorn', 'react-hooks'],
   env: {
     browser: true,
     node: true,
@@ -62,8 +54,24 @@ module.exports = {
     jasmine: true,
   },
   rules: {
-    'accessor-pairs': 0, // 在对象中使用getter/setter
-    'brace-style': [1, '1tbs'], //大括号风格
+    'react/display-name': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/state-in-constructor': 0,
+    'react/static-property-placement': 0,
+    // Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
+    'react/destructuring-assignment': 'off',
+    'react/jsx-filename-extension': 'off',
+    'react/no-array-index-key': 'warn',
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'warn', // Checks deps of Hooks
+    'react/require-default-props': 0,
+    'react/jsx-fragments': 0,
+    'react/jsx-wrap-multilines': 0,
+    'react/prop-types': 0,
+    'react/forbid-prop-types': 0,
+    'react/sort-comp': 0,
+    'react/react-in-jsx-scope': 0,
+    'react/jsx-one-expression-per-line': 0,
     'generator-star-spacing': 0,
     'function-paren-newline': 0,
     'import/no-unresolved': 0,
@@ -96,6 +104,7 @@ module.exports = {
     'object-curly-newline': 0,
     'implicit-arrow-linebreak': 0,
     'operator-linebreak': 0,
+    'eslint-comments/no-unlimited-disable': 0,
     'no-param-reassign': 2,
     'space-before-function-paren': 0,
     ...(isTsProject ? tsEslintConfig : {}),
@@ -104,13 +113,13 @@ module.exports = {
     // support import modules from TypeScript files in JavaScript files
     'import/resolver': {
       node: {
-        extensions: isTsProject ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] : ['.js', '.jsx', '.vue'],
+        extensions: isTsProject ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] : ['.js', '.jsx'],
       },
     },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
     },
-    'import/extensions': ['.js', '.vue', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts'],
+    'import/extensions': ['.js', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts'],
     'import/external-module-folders': ['node_modules', 'node_modules/@types'],
     polyfills: ['fetch', 'Promise', 'URL', 'object-assign'],
   },

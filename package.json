@@ -1,15 +1,14 @@
 {
   "name": "snb-fabric",
-  "version": "1.0.1",
+  "version": "1.0.9",
   "description": "A collection of configuration files containing prettier, eslint, stylelint",
   "keywords": [
     "eslint",
-    "prettier",
-    "antd",
-    "ant",
-    "design",
-    "pro"
+    "prettier"
   ],
+  "bin": {
+    "fabric": "./cli.js"
+  },
   "homepage": "https://github.com/cherislive/snb-fabric#readme",
   "bugs": {
     "url": "https://github.com/cherislive/snb-fabric/issues"
@@ -19,10 +18,11 @@
     "url": "git+https://github.com/cherislive/snb-fabric"
   },
   "license": "ISC",
-  "author": "qixian.cs@outlook.com",
+  "author": "i@cheris.cn",
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "cli.js"
   ],
   "scripts": {
     "build": "tsc --build tsconfig.json",

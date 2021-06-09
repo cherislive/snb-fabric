@@ -1,6 +1,6 @@
 {
   "name": "snb-fabric",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A collection of configuration files containing prettier, eslint, stylelint",
   "keywords": [
     "eslint",

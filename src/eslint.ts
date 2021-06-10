@@ -1,39 +1,19 @@
-// import * as path from 'path';
-// import * as fs from 'fs';
-// import tsEslintConfig from './tsEslintConfig';
-
-/**
- * 在使用自定义解析器时，
- * 为了让 ESLint 在处理非 ECMAScript 5 特性时正常工作，
- * 配置属性 parserOptions 仍然是必须的
- * 解析器会被传入parserOptions，
- * 但是不一定会使用它们来决定功能特性的开关。	
- */
-// const parserOptions = {
-//   ecmaFeatures: {
-//     jsx: true,
-//   },
-//   babelOptions: {
-//     presets: ['@babel/preset-env', '@babel/preset-typescript'],
-//     plugins: [
-//       ['@babel/plugin-proposal-decorators', { legacy: true }],
-//       ['@babel/plugin-proposal-class-properties', { loose: true }],
-//     ],
-//   },
-//   requireConfigFile: false,
-//   project: './tsconfig.json',
-//   parser: '@typescript-eslint/parser',
-// };
-
 module.exports = {
   globals: {
     page: true,
   },
   root: true,
   env: {
-    node: true
+    browser: true,
+    node: true,
+    es6: true,
+    mocha: true,
+    jest: true,
+    jasmine: true
   },
   extends: [
+    'eslint-config-airbnb-base',
+    'prettier',
     "plugin:vue/essential",
     "eslint:recommended",
     "@vue/typescript"

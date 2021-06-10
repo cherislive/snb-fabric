@@ -9,11 +9,9 @@ module.exports = {
     es6: true,
     mocha: true,
     jest: true,
-    jasmine: true
+    jasmine: true,
   },
   extends: [
-    'eslint-config-airbnb-base',
-    'prettier',
     "plugin:vue/essential",
     "eslint:recommended",
     "@vue/typescript"

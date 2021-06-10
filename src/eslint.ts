@@ -1,6 +1,6 @@
-import * as path from 'path';
-import * as fs from 'fs';
-import tsEslintConfig from './tsEslintConfig';
+// import * as path from 'path';
+// import * as fs from 'fs';
+// import tsEslintConfig from './tsEslintConfig';
 
 /**
  * 在使用自定义解析器时，
@@ -9,64 +9,37 @@ import tsEslintConfig from './tsEslintConfig';
  * 解析器会被传入parserOptions，
  * 但是不一定会使用它们来决定功能特性的开关。	
  */
-const parserOptions = {
-  ecmaFeatures: {
-    jsx: true,
-  },
-  babelOptions: {
-    presets: ['@babel/preset-env', '@babel/preset-typescript'],
-    plugins: [
-      ['@babel/plugin-proposal-decorators', { legacy: true }],
-      ['@babel/plugin-proposal-class-properties', { loose: true }],
-    ],
-  },
-  requireConfigFile: false,
-  project: './tsconfig.json',
-  parser: '@typescript-eslint/parser',
-};
-
-const isJsMoreTs = async (path = 'src') => {
-  const fg = require('fast-glob');
-  const jsFiles = await fg(`${path}/src/**/*.{js,jsx}`, { deep: 3 });
-  const tsFiles = await fg(`${path}/src/**/*.{ts,tsx}`, { deep: 3 });
-  return jsFiles.length > tsFiles.length;
-};
-
-const isTsProject = fs.existsSync(path.join(process.cwd() || '.', './tsconfig.json'));
-
-if (isTsProject) {
-  try {
-    isJsMoreTs(process.cwd()).then((jsMoreTs) => {
-      if (!jsMoreTs) return;
-      console.log('这是一个 TypeScript 项目，如果不是请删除 tsconfig.json');
-    });
-  } catch (e) {
-    console.log(e);
-  }
-}
+// const parserOptions = {
+//   ecmaFeatures: {
+//     jsx: true,
+//   },
+//   babelOptions: {
+//     presets: ['@babel/preset-env', '@babel/preset-typescript'],
+//     plugins: [
+//       ['@babel/plugin-proposal-decorators', { legacy: true }],
+//       ['@babel/plugin-proposal-class-properties', { loose: true }],
+//     ],
+//   },
+//   requireConfigFile: false,
+//   project: './tsconfig.json',
+//   parser: '@typescript-eslint/parser',
+// };
 
 module.exports = {
   globals: {
     page: true,
   },
   root: true,
-  extends: [
-    'eslint-config-airbnb-base',
-    'prettier',
-    'plugin:vue/essential',
-    'eslint:recommended',
-  ].concat(
-    isTsProject ? ['prettier/@typescript-eslint', 'plugin:@typescript-eslint/recommended'] : [],
-  ),
-  parser: isTsProject ? '@typescript-eslint/parser' : '@babel/eslint-parser',
-  plugins: ['eslint-comments', 'jest', 'unicorn', 'html', 'vue'],
   env: {
-    browser: true,
-    node: true,
-    es6: true,
-    mocha: true,
-    jest: true,
-    jasmine: true,
+    node: true
+  },
+  extends: [
+    "plugin:vue/essential",
+    "eslint:recommended",
+    "@vue/typescript"
+  ],
+  parserOptions: {
+    parser: "@typescript-eslint/parser"
   },
   rules: {
     // Conflict with prettier
@@ -105,21 +78,8 @@ module.exports = {
     'eslint-comments/no-unlimited-disable': 0,
     'no-param-reassign': 2,
     'space-before-function-paren': 0,
-    ...(isTsProject ? tsEslintConfig : {}),
   },
   settings: {
-    // support import modules from TypeScript files in JavaScript files
-    'import/resolver': {
-      node: {
-        extensions: isTsProject ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] : ['.js', '.jsx'],
-      },
-    },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
-    },
-    'import/extensions': ['.js', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts'],
-    'import/external-module-folders': ['node_modules', 'node_modules/@types'],
-    polyfills: ['fetch', 'Promise', 'URL', 'object-assign'],
-  },
-  parserOptions,
+    polyfills: ['fetch', 'promises', 'url'],
+  }
 };

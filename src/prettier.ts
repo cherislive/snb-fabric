@@ -12,6 +12,6 @@ module.exports = {
       options: {
         parser: 'json',
       },
-    }
+    },
   ],
 };

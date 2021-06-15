@@ -7,7 +7,6 @@ const osLocale = require('os-locale');
 const msgPath = process.env.GIT_PARAMS || process.env.HUSKY_GIT_PARAMS;
 const msg = require('fs').readFileSync(msgPath, 'utf-8').trim();
 
-
 chalk.enabled = true;
 chalk.level = 2;
 

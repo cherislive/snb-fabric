@@ -1,0 +1,16 @@
+{
+  "name": "vue-mdf",
+  "version": "1.0.0",
+  "description": "VUe multilevel data flow.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Model",
+    "Loading",
+    "Data"
+  ],
+  "author": "cheris",
+  "license": "ISC"
+}

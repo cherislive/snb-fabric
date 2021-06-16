@@ -33,7 +33,7 @@
     "prettier": "prettier -c --write \"**/*\"",
     "testTS": "npm run build && cd tsExample && npm run lint",
     "testJS": "npm run build && cd jsExample && npm run lint",
-    "test": "npm run testJS"
+    "test": "npm run testJS && npm run testTS"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -45,7 +45,7 @@
     "@babel/preset-typescript": "^7.12.7",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
-    "@vue/eslint-config-standard": "^6.0.0",
+    "babel-eslint": "^10.1.0",
     "chalk": "^4.1.1",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -57,11 +57,13 @@
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jest": "^24.0.1",
+    "eslint-plugin-json": "^3.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.0",
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.1.2",
+    "eslint-plugin-sonarjs": "^0.8.0-125",
     "eslint-plugin-unicorn": "^20.0.0",
     "fast-glob": "^3.2.4",
     "os-locale": "^5.0.0",

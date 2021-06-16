@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>getmessage</title>
+  </head>
+
+  <body>
+    <script>
+      //iframe接收消息，并把当前颜色发送给主页面
+      window.addEventListener(
+        'message',
+        (e) => {
+          if (e.source != window.parent) return;
+          console.log(e.data);
+          localStorage.setItem('task', e.data);
+          window.parent.postMessage('finished', '*');
+        },
+        false,
+      );
+    </script>
+  </body>
+</html>

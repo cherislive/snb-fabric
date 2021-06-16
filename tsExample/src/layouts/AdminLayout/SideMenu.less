@@ -1,0 +1,48 @@
+.sider-menu {
+  height: calc(100vh - 56px);
+  overflow: auto;
+}
+
+//火狐浏览器滚动条兼容
+.aside-menu {
+  scrollbar-color: rgba(0, 0, 0, 0.4) #eee; //滚动条轨道颜色   滚动条滑块的颜色
+  scrollbar-width: thin; //thin模式下滚动条两端的三角按钮会消失
+}
+
+//谷歌浏览器滚动条兼容
+.aside-menu::-webkit-scrollbar {
+  //滚动条整体部分
+  width: 10px;
+  height: 10px;
+  background-color: #eee;
+}
+
+.aside-menu::-webkit-scrollbar-track {
+  //滚动条的轨道（里面装有Thumb）
+  background-color: transparent;
+}
+
+.aside-menu::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4); //滚动条里面的小方块
+  background-clip: padding-box;
+  border: 1px solid transparent;
+  border-radius: 7px;
+}
+
+.el-menu-item {
+  padding: 0 24px;
+  border-left: 4px solid rgba(0, 0, 0, 0);
+}
+.el-submenu.is-active {
+  .el-submenu__title {
+    color: #fff !important;
+  }
+}
+.el-menu-item.is-active {
+  // border-left: 4px solid #fff;
+  background-color: #1890ff !important;
+}
+
+.el-submenu__title {
+  padding-left: 24px;
+}

@@ -1,4 +1,28 @@
-'use strict';
+/** @format */
+import * as path from 'path';
+import * as fs from 'fs';
+// import tsEslintConfig from './tsEslintConfig';
+
+const isTsProject = fs.existsSync(path.join(process.cwd() || '.', './tsconfig.json'));
+
+const isJsMoreTs = async (path = 'src') => {
+  const fg = require('fast-glob');
+  const jsFiles = await fg(`${path}/src/**/*.{js,jsx}`, { deep: 3 });
+  const tsFiles = await fg(`${path}/src/**/*.{ts,tsx}`, { deep: 3 });
+  return jsFiles.length > tsFiles.length;
+};
+
+if (isTsProject) {
+  try {
+    isJsMoreTs(process.cwd()).then((jsMoreTs) => {
+      if (!jsMoreTs) return;
+      console.log('这是一个 TypeScript 项目，如果不是请删除 tsconfig.json');
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 module.exports = {
   root: true,
   globals: {
@@ -19,26 +43,36 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
-    mocha: true,
-    jest: true,
-    jasmine: true,
-    jquery: true,
+    // mocha: true,
+    // jest: true,
+    // jasmine: true,
+    // jquery: true,
   },
   extends: [
-    'plugin:vue/essential',
-    'plugin:vue/strongly-recommended',
     'eslint:recommended',
-    '@vue/typescript',
-    '@vue/standard',
+    // 'prettier',
     'airbnb-base',
+    // '@vue/standard',
+    'plugin:vue/essential',
+    'plugin:vue/recommended',
+    'plugin:sonarjs/recommended',
+    // "plugin:vue/vue3-recommended"
   ],
+  plugins: ['json', 'sonarjs'],
   parserOptions: {
-    parser: 'babel-eslint',
+    // "parser": "babel-eslint",
+    parser: isTsProject ? '@typescript-eslint/parser' : '@babel/eslint-parser',
     sourceType: 'module',
+    ecmaVersion: 8,
     allowImportExportEverywhere: true,
+    ecmaFeatures: {
+      jsx: true,
+    },
     codeFrame: false,
   },
   rules: {
+    'no-return-await': 'off',
+    'import/no-unresolved': 0,
     indent: [
       'warn',
       2,
@@ -48,8 +82,8 @@ module.exports = {
         ignoredNodes: ['TemplateLiteral'],
       },
     ],
-    'no-console': 'off',
-    // 'template-curly-spacing': 'off',   // 保持模板文字内部空间的一致性
+    'no-console': 1,
+    'template-curly-spacing': 'off', // 保持模板文字内部空间的一致性
     'no-restricted-globals': ['error', 'event', 'fdescribe'], // 该规则允许您指定您不希望在应用程序中使用的全局变量名称。
     // "quotes": ["error", "single"],
     quotes: [
@@ -85,11 +119,11 @@ module.exports = {
     'one-var-declaration-per-line': ['error', 'initializations'], // 规则在变量声明周围执行一致的换行符。这条规则忽略了for循环条件中的变量声明。
     'one-var': 'off',
     // "camelcase": "off",
-    // "no-shadow": "off",
+    'no-shadow': 'off', // 该规则旨在消除阴影变量声明
     // "no-continue": "off",
     // "no-plusplus": "off",
     // "operator-linebreak": "off",
-    // "no-restricted-syntax": "off",
+    'no-restricted-syntax': 'off', // 此规则不允许指定（即用户定义）语法
     // "no-underscore-dangle": "off",
     'no-mixed-operators': 'off',
     // "no-control-regex": "off",
@@ -100,16 +134,18 @@ module.exports = {
 
     'import/no-dynamic-require': 'off',
     'import/no-cycle': 'off',
-    'import/extensions': [
-      'error',
-      'always',
-      {
-        js: 'never',
-        jsx: 'never',
-        vue: 'never',
-        json: 'never',
-      },
-    ],
+    'import/extensions': 0,
+    // 'import/extensions': [
+    //   'error',
+    //   'always',
+    //   {
+    //     ts: 'never',
+    //     js: 'never',
+    //     jsx: 'never',
+    //     vue: 'never',
+    //     json: 'never',
+    //   },
+    // ],
     'import/prefer-default-export': 'off',
 
     'vue/max-attributes-per-line': [
@@ -148,7 +184,6 @@ module.exports = {
         ignoreReadBeforeAssign: false,
       },
     ],
-
     'sonarjs/no-duplicate-string': 'off',
     'sonarjs/cognitive-complexity': ['warn', 30],
     'sonarjs/prefer-immediate-return': 'off',
@@ -161,8 +196,10 @@ module.exports = {
     'sonarjs/no-extra-arguments': 'warn',
     'sonarjs/prefer-object-literal': 'warn',
     'sonarjs/no-all-duplicated-branches': 'warn',
-  },
-  settings: {
-    polyfills: ['fetch', 'promises', 'url'],
+    ...(isTsProject
+      ? {
+          '@typescript-eslint/interface-name-prefix': 0,
+        }
+      : {}),
   },
 };

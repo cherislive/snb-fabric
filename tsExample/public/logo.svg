@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>项目验收</title>
+    <defs>
+        <linearGradient x1="100%" y1="45.6859732%" x2="0%" y2="77.9222582%" id="linearGradient-1">
+            <stop stop-color="#B401FE" offset="0%"></stop>
+            <stop stop-color="#3967FF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="18.0001377%" x2="0%" y2="81.9998623%" id="linearGradient-2">
+            <stop stop-color="#F8439F" offset="0%"></stop>
+            <stop stop-color="#D236DE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="项目验收" fill-rule="nonzero">
+            <path d="M20,0 L180,0 C193.333333,0 200,6.66666667 200,20 L200,180 C200,193.333333 193.333333,200 180,200 L20,200 C6.66666667,200 0,193.333333 0,180 L0,20 C0,6.66666667 6.66666667,0 20,0 Z" id="路径" fill="url(#linearGradient-1)"></path>
+            <path d="M109.999805,123.388867 L109.999805,117.117383 L121.981055,117.117383 L121.981055,75.421875 C133.334375,82.390625 151.190039,94.1673828 170.000034,82.471875 C170.11582,117.500391 126.110742,123.958008 109.999805,123.388672 L109.999805,123.388867 Z" id="路径" fill="url(#linearGradient-2)"></path>
+            <path d="M57.9998047,165.410547 L57.9998047,48.1970703 L67.7978516,48.1970703 C84.9951172,41.0236328 102.631641,49.1580078 115.999805,56.7537109 L115.999805,104.92832 L113.07168,105.748828 C102.935742,105.748828 77.5056641,93.2773437 69.6224609,105.080859 L69.5998047,165.422266 L57.9998047,165.410547 Z" id="路径" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>
